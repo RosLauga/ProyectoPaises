@@ -12,7 +12,7 @@ const router = Router();
 
 const getCountries = async () => {
     const paises = await axios.get("https://restcountries.com/v3/all");   
-    return paises       
+    return paises      
 }
 
 const createCountries = async (paises) => {
