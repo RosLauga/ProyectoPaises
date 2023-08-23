@@ -12,3 +12,28 @@
     box-shadow:0px 0px 12px 4px rgba(0,0,0,0.6);
   }
   
+  .buttonhome {
+    width:3em;
+    height:3em;
+    display: flex;
+    background-image: url("../images/brujula.png");
+    background-size: 100%; 
+    transition:1s ease-in; 
+  }
+  .buttonhome:hover {
+    transform: rotate(360deg);
+    transition:1s ease-out;
+  }
+
+  .App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

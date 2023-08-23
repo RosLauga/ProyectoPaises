@@ -1,0 +1,31 @@
+/* CONTAINER COUNTRY DETAIL */
+
+.Containerleft {
+    display: flex;        
+    justify-content: left;
+  }
+  
+  .CountryCol {
+    width: 50%;
+  }
+  .CountryDetail {
+    margin: 3em 0 2em 4em;
+    float: left;
+    border-radius: 40px 40px 40px 0px;
+    border:solid 5px white;
+    background: rgba(250,250,250,0.6);
+    box-shadow: 0px 5px 5px 1px rgba(0,0,0,0.6), inset 0px 0px 10px 4px rgba(0,0,0,0.4) ;
+    width: 80%;
+    height: 90%;
+    padding: 5% 0 0 0;
+  }
+  
+  .CountryDetail h1, .Activity h1 {
+    background-color: rgba(250,250,250,0.9);
+    padding:2px 5px;
+  }
+
+  .iframe {
+    width: 100%;
+    height: 400px;
+   }

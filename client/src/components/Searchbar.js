@@ -21,7 +21,7 @@ function SearchBar({paginacion}) {
     e.preventDefault();
     paginacion("1");
     dispatch(searchCountry(input));
-    setInput({buscar: ""})
+    setInput({buscar: ""});
   };
   
     return (

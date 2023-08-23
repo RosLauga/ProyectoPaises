@@ -2,6 +2,8 @@ import React from 'react';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { createActivity, getCountries } from '../actions';
+import { Link } from 'react-router-dom'
+import { handleAuth, sortDesc } from './functions'
 
 
 
@@ -22,15 +24,13 @@ const listadopaises = useSelector((state) => state.allCountries);
 const dispatch = useDispatch();
 listadopaises.sort(sortDesc)
 
-function sortDesc(a,b){
-    if (a.name < b.name) return -1
-    else if (a.name > b.name) return 1
-    else return 0   
-}
-
 useEffect (() => {
     dispatch(getCountries());
 },[dispatch])
+
+const handleDelete = (p) => {
+    setInputAct({...inputAct, activity : inputAct.activity.filter((c) => c !== p)})
+}
 
 const handleChange = (e) => {
     e.preventDefault();
@@ -40,31 +40,10 @@ const handleChange = (e) => {
     else setInputAct({...inputAct, [e.target.name]: e.target.value})
     }
 
-const handleAuth = () => {
-
-
-    console.log(inputAct.name.length)
-    if (inputAct.name.length === 0) {
-         return "noname"
-    }    
-    if (inputAct.difficulty.length === 0) {
-         return "nodiff"
-    }
-    else if (inputAct.duration.length === 0) {
-        return "nodur"
-    } 
-    else if (inputAct.season.length === 0) {
-        return "noseas"
-    } 
-    else if (inputAct.activity.length === 0) {
-        return "noid"
-    } 
-    else {return "ok"}   
-}    
-const handleSubmit = (e) => {
+  
+const handleSubmit =  (e) => {
     e.preventDefault();
-    const check = handleAuth()
-    console.log(check)
+    const check = handleAuth(inputAct)
     if (check === "noname"){ 
     var authname = "Debes completar el nombre de la actividad"     
     setError(authname)     
@@ -86,14 +65,15 @@ const handleSubmit = (e) => {
     setError(authid)     
     }
     else {
+        setError("");
         dispatch(createActivity(inputAct));
         setInputAct(initialState);
-        setSuccess("Actividad Creada")
+        setSuccess("Actividad Creada");
     }      
 }    
     return (
     <>
-    
+    <Link to="/countries"><button className='button-back'>Volver</button></Link>
     <div className='Activity'>
     <div>
         <h1>Crear Actividad Turistica</h1>
@@ -102,7 +82,7 @@ const handleSubmit = (e) => {
         <ul>
             <li>
                 <label>Nombre: </label>
-                <input
+                <input className='selectdiv'
                 type="text"
                 name="name"
                 value={inputAct.name}
@@ -111,17 +91,17 @@ const handleSubmit = (e) => {
             </li>
             <li>
                 <label>País </label>
-                <select name="activity" onChange={(e) => {handleChange(e)}}>
+                <select className='selectdiv' name="activity" onChange={(e) => {handleChange(e)}}>
                     {
                         listadopaises && listadopaises.map((p) => {
                             return <option key={p.id} value={p.id}>{p.name}</option>
                         } )
                     }
                 </select>
-                <h3>Paises Seleccionados</h3>
+                <h4>Paises Seleccionados</h4>
                     {
-                        inputAct.activity && inputAct.activity.map((p) => <li key={p}>{p}</li>)
-                    } 
+                        inputAct.activity && inputAct.activity.map((p) => <div className='container-addlist'><li className="activity-addlist" key={p} >{p}</li><button onClick={() =>{handleDelete(p)}}>x</button></div>)
+                    }
                        
             </li>
             <li>
@@ -150,7 +130,7 @@ const handleSubmit = (e) => {
             </li>
             <li>
                 <label>Temporada: </label>
-                <select name="season" onChange={(e) => {handleChange(e)}}className='selectdiv'>
+                <select name="season" onChange={(e) => {handleChange(e)}} className='selectdiv'>
                     <option>Seleccionar temporada...</option>
                     <option value="Verano">Verano</option>
                     <option value="Otoño">Otoño</option>  
@@ -164,7 +144,7 @@ const handleSubmit = (e) => {
                 <h4 className='Create-Success'>{Success}</h4>
             </li>
             <li>
-                <button type="submit" value="Create">Crear Actividad Turistica</button>
+                <button type="submit" className='button-activity' value="Create"><span>Crear Actividad</span></button>
             </li>
         </ul>
         </form>

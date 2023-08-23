@@ -1,0 +1,24 @@
+.paginado ul li {
+    display: inline-block;
+  }
+  
+  .paginado button {
+    color: #0d0c0c;
+    font-weight: bold;
+    background: #f3eded;
+    border-radius: 50%;
+    width: 2em;
+    height: 2em;
+    padding: 1px;
+  }
+  
+  .button-active {
+    background-color: black!important;
+    color: white!important;
+  }
+
+  .button-item:hover {
+      background: black;
+      color: white;
+      transition:all 0.5s linear;
+  }

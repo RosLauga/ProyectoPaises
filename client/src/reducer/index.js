@@ -10,8 +10,6 @@ const initialState = {
 const rootReducer = (state = initialState, action) => {
     switch(action.type) {
         case GET_COUNTRIES:
-            const info = action.payload
-            console.log(info)
             return {
                 ...state,
                 countries: action.payload,
@@ -19,7 +17,8 @@ const rootReducer = (state = initialState, action) => {
             }
         case GET_FILTER:
             const nofiltercount = state.allCountries;
-            const filtercountries = action.payload === "all" ? state.countries : nofiltercount.filter((c) => c.region == action.payload)
+            const filtercountries = action.payload === "all" ? state.countries : nofiltercount.filter((c) => c.region === action.payload)
+            
             return {
                ...state, 
                countries: filtercountries  
@@ -27,7 +26,7 @@ const rootReducer = (state = initialState, action) => {
         case GET_COUNTRY:
             return {
                  ...state, 
-                country : action.payload  
+                country : action.payload 
             } 
         case SEARCH_COUNTRY:
             const search = state.allCountries;
@@ -38,8 +37,7 @@ const rootReducer = (state = initialState, action) => {
                 ...state, 
                 countries : onecountry  
             }
-        case LIST_ACTIVITY:
-            
+        case LIST_ACTIVITY:            
             return {
                 ...state,
                 activity: action.payload
@@ -49,7 +47,7 @@ const rootReducer = (state = initialState, action) => {
         const filteractivities = []
             for (let i = 0; i<countries.length;i++) {
                 for(let o = 0;o < countries[i].tourisms.length; o++){
-                  if (countries[i].tourisms[o].name == action.payload)  
+                  if (countries[i].tourisms[o].name === action.payload)  
                   {  
                     filteractivities.push(countries[i])
                   }

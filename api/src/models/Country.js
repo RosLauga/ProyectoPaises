@@ -48,6 +48,12 @@ module.exports = (sequelize) => {
     },
     population: {
       type: DataTypes.INTEGER,      
-    },    
+    },
+    lat: {
+      type: DataTypes.DECIMAL,
+    },
+    long: {
+      type: DataTypes.DECIMAL,
+    }       
   });  
 };
